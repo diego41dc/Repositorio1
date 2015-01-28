@@ -1,1 +1,3 @@
 https://github.com/diego41dc/Repositorio1.git
+
+java -cp target/PSP0-1.0-SNAPSHOT.jar edu.uniandes.ecos.ASE.app.App
