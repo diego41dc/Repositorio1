@@ -1,4 +1,4 @@
-package edu.uniandes.ASE.app;
+package edu.uniandes.ecos.psp0;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -15,21 +15,24 @@ public class AppTest
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName ) {
+    public AppTest( String testName )
+    {
         super( testName );
     }
 
     /**
      * @return the suite of tests being tested
      */
-    public static Test suite() {
+    public static Test suite()
+    {
         return new TestSuite( AppTest.class );
     }
 
     /**
      * Rigourous Test :-)
      */
-    public void testApp() {
+    public void testApp()
+    {
         assertTrue( true );
     }
 }
