@@ -54,8 +54,7 @@ public class App
         System.out.println("Std. Dev:" + Math.round(desviacion * 100.0) / 100.0);
         
     }
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         App a = new App();
         a.calcular("datos.txt");
     }

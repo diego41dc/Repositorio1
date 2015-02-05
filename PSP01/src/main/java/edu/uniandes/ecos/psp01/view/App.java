@@ -4,8 +4,7 @@ import edu.uniandes.ecos.psp01.model.Leer;
 import java.io.File;
 
 
-public class App 
-{
+public class App {
    
     
     public static void main( String[] args ) {
