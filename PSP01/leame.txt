@@ -1,0 +1,3 @@
+El proyecto se encuentra en el repositorio: Con nombre PSP01 https://github.com/diego41dc/Repositorio1.git
+
+Para ejecutarlo por consola: java -cp target/PSP01-1.0.jar edu.uniandes.ecos.psp01.view.App
