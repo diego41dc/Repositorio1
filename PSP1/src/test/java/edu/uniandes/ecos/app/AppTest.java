@@ -1,4 +1,4 @@
-package edu.uniandes.ecos.psp0;
+package edu.uniandes.ecos.app;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
