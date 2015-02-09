@@ -20,8 +20,8 @@ public class App extends HttpServlet{
         
         System.out.println(System.getenv());
         
-        //Server server = new Server(8280);
-        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+       Server server = new Server(8380);
+        //Server server = new Server(Integer.valueOf(System.getenv("PORT")));
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
