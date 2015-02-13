@@ -1,0 +1,3 @@
+Para ejecutar el proyecto, debe correr la clase edu.uniandes.ecos.psp1.controller.App.java
+
+El repositorio del proyecto esta en: https://github.com/diego41dc/Repositorio1/tree/master/PSP1

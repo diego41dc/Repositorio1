@@ -1,9 +1,5 @@
 package edu.uniandes.ecos.psp1.view;
 
-import edu.uniandes.ecos.psp1.model.LeerArchivo;
-import java.io.File;
-
-
 public class ConsoleView {
    
     

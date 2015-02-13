@@ -16,6 +16,8 @@ public class Calculate
     private Double b0;
     private Double coefCorrelacion;
     private Double coefCorrelacionCuadrado;
+    private Double yK;
+    private Double xK;
     private String error;
     
     public Calculate(){
@@ -51,13 +53,15 @@ public class Calculate
       
     }
     
-     public void calcularValores(LinkedList<Double[]> lista){
+     public void calcularValores(LinkedList<Double[]> lista, Double xK){
         try{
+            this.xK = xK;
             alistarValores(lista);
             b1 = (sumaXY-(cantidad * mediaX * mediaY))/(sumaXCuadrado-(cantidad *(Math.pow(mediaX,2))));
             b0 = (mediaY - (b1 * mediaX));        
             coefCorrelacion = ((cantidad * sumaXY) - (sumaX * sumaY))/Math.sqrt(((cantidad * sumaXCuadrado)-Math.pow(sumaX,2))*((cantidad * sumaYCuadrado)-Math.pow(sumaY,2)));
             coefCorrelacionCuadrado = Math.pow(coefCorrelacion,2);
+            yK = b0+(b1*xK);
         } catch (Exception e) {
           error = e.getMessage();
       }
@@ -110,6 +114,14 @@ public class Calculate
 
     public Double getCoefCorrelacionCuadrado() {
         return (Math.round(coefCorrelacionCuadrado*10000D)/10000D);
+    }
+    
+    public Double getYk() {
+        return (Math.round(yK*10000D)/10000D);
+    }
+    
+    public Double getXk() {
+        return xK;
     }
 
     public String getError() {

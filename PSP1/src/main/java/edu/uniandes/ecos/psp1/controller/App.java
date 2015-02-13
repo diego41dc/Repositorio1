@@ -3,9 +3,8 @@ package edu.uniandes.ecos.psp1.controller;
 
 
 import edu.uniandes.ecos.psp1.model.Calculate;
-import edu.uniandes.ecos.psp1.model.LeerArchivo;
+import edu.uniandes.ecos.psp1.model.Datos;
 import edu.uniandes.ecos.psp1.view.MainView;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import javax.servlet.ServletException;
@@ -56,42 +55,93 @@ public class App extends HttpServlet{
     
    
     public void ejecutar(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        File f = new File(System.getProperty("user.dir"));
-        LeerArchivo l = new LeerArchivo();
-        l.dir(f);
         
+        StringBuilder st = new StringBuilder();
         
-        LinkedList<Double[]> lista = new LinkedList();
-        Double [] d = new Double []{130D,186D};
-        lista.add(d);
-        d = new Double [] {650D,699D};
-        lista.add(d);
-        d = new Double [] {99D,132D};
-        lista.add(d);
-        d =  new Double []{150D,272D};
-        lista.add(d);
-        d =  new Double []{128D,291D};
-        lista.add(d);
-        d =  new Double []{302D,331D};
-        lista.add(d);
-        d =  new Double []{95D,199D};
-        lista.add(d);
-        d =  new Double []{945D,1890D};
-        lista.add(d);
-        d =  new Double []{368D,788D};
-        lista.add(d);
-        d =  new Double []{961D,1601D};
-        lista.add(d);
+        Datos d = new Datos();
         Calculate c = new Calculate();
-        c.calcularValores(lista);
+       
+        d.cargarDatos1();
+        c.calcularValores(d.getLista(),d.getxK());
         
         if(c.getError() != null && !c.getError().isEmpty()){
             MainView.error(req, resp, c.getError());
         } else {
-            MainView.showResults(req, resp, c, lista);
+            calcularRespuesta(c, d.getLista(),d.getxK(), d.getNombreX(), d.getNombreY(), d.getTitulo(),st);
+            
+            d = new Datos();
+            c = new Calculate();
+            d.cargarDatos2();
+            c.calcularValores(d.getLista(),d.getxK());
+            
+            if(c.getError() != null && !c.getError().isEmpty()){
+                MainView.error(req, resp, c.getError());
+            } else {
+                calcularRespuesta(c, d.getLista(),d.getxK(), d.getNombreX(), d.getNombreY(), d.getTitulo(),st);
+                
+                d = new Datos();
+                c = new Calculate();
+                d.cargarDatos3();
+                c.calcularValores(d.getLista(),d.getxK());
+                
+                if(c.getError() != null && !c.getError().isEmpty()){
+                    MainView.error(req, resp, c.getError());
+                } else {
+                    calcularRespuesta(c, d.getLista(),d.getxK(), d.getNombreX(), d.getNombreY(), d.getTitulo(),st);
+                    
+                    d = new Datos();
+                    c = new Calculate();
+                    d.cargarDatos4();
+                    c.calcularValores(d.getLista(),d.getxK());
+                    
+                    if(c.getError() != null && !c.getError().isEmpty()){
+                        MainView.error(req, resp, c.getError());
+                    } else {
+                        calcularRespuesta(c, d.getLista(),d.getxK(), d.getNombreX(), d.getNombreY(), d.getTitulo(),st);
+                        MainView.showResults(req, resp, st.toString());
+                    }
+                   
+                }
+            }
         }
         
         
+        
+    }
+    
+    
+    public void calcularRespuesta(Calculate c, LinkedList<Double[]> lista, Double xK,String nombreX,String nombreY, String titulo, StringBuilder st){
+        st.append("<h2>"+titulo+"</h1>");
+        st.append("<dl>");
+        st.append("<dt><b>Datos ingresados:</b></dt>");
+       
+        st.append("<dd>X<SUB>k</SUB><b>:"+xK+ "</b></dd>");
+        
+        st.append("<dd>Lista:</dd>");
+        st.append("<dd><b>["+nombreX+" , "+nombreY+ "]</b></dd>");
+        
+        for(Double[] l: lista){
+             st.append("<dd>["+l[0]+" , "+l[1]+ "]</dd>");
+        }
+        
+        st.append("<dt></dt>");
+        st.append("<dt><b>Datos calculados:</b></dt>");
+        st.append("<dd><b>mediaX:</b>"+c.getMediaX()+ "</dd>");
+        st.append("<dd><b>mediaY:</b>"+c.getMediaY()+ "</dd>");
+        st.append("<dd><b>sumaX:</b>"+c.getSumaX()+ "</dd>");
+        st.append("<dd><b>sumaY:</b>"+c.getSumaY()+ "</dd>");
+        st.append("<dd><b>sumaXCuadrado:</b>"+c.getSumaXCuadrado()+ "</dd>"); 
+        st.append("<dd><b>sumaYCuadrado:</b>"+c.getSumaYCuadrado()+ "</dd>");
+        st.append("<dd><b>sumaXY:</b>"+c.getSumaXY()+ "</dd>");
+        st.append("<dd><b>b1:</b>"+c.getB1()+ "</dd>");
+        st.append("<dd><b>b0:</b>"+c.getB0()+ "</dd>");
+        st.append("<dd><b>coefCorrelacion:</b>"+c.getCoefCorrelacion()+ "</dd>");
+        st.append("<dd><b>coefCorrelacionCuadrado:</b>"+c.getCoefCorrelacionCuadrado()+ "</dd>");
+        st.append("<dd><b>Y<SUB>k</SUB>:</b>"+c.getYk()+ "</dd>");
+        
+        st.append("</dl>");
+        
+        st.append("</br>");
     }
 
 }
