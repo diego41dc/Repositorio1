@@ -1,0 +1,4 @@
+Para ejecutar el proyecto, debe correr la clase edu.uniandes.ecos.psp2.controller.App.java, se ejecuta en el localhost:8380
+
+
+El repositorio del proyecto esta en: https://github.com/diego41dc/Repositorio1/tree/master/PSP2
